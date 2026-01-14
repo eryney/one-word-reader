@@ -1,6 +1,6 @@
-# Flow
+# One Word Reader
 
-A modern web-based speed reading application using RSVP (Rapid Serial Visual Presentation) technology with Optimal Recognition Point (ORP) highlighting. Flow through your books faster than ever.
+A no-frills speed reading app using RSVP (Rapid Serial Visual Presentation) technology. Read one word at a time with optimal recognition point highlighting.
 
 ## Features
 
@@ -114,4 +114,4 @@ ISC
 
 ## Support
 
-If you enjoy using Flow, consider supporting the development!
+If you enjoy using this, consider supporting via the Support button in the app!

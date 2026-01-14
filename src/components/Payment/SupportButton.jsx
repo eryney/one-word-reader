@@ -6,10 +6,10 @@ export default function SupportButton() {
       href={STRIPE_PAYMENT_LINK}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-700 hover:bg-red-50 dark:hover:bg-gray-600 text-red-600 dark:text-red-400 text-sm font-bold rounded-full transition-all shadow-md hover:shadow-lg hover:scale-105"
-      title="Optional — $5 appreciated"
+      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 text-sm font-black rounded-lg transition-all shadow-lg hover:shadow-xl hover:scale-105 border-2 border-yellow-600"
+      title="Optional — pay if this is useful to you"
     >
-      <span>Support</span>
+      <span>💰 Pay $5</span>
     </a>
   );
 }

@@ -52,9 +52,17 @@ export default function LibraryView({ onBookSelect }) {
               You're maybe here from Twitter. This is your no-frills speed reader, based on the principles of RSVP (Rapid Serial Visual Presentation).
               I wrote this for myself, but you can use it too if you think it'd be helpful.
             </p>
-            <p className="text-base text-gray-600 dark:text-gray-400 mb-4">
-              It's free, but you can pay me if you like it using the Support button at the top right.
-            </p>
+
+            {/* Payment CTA - Made prominent */}
+            <div className="mb-6 p-6 bg-yellow-50 dark:bg-yellow-900/20 border-2 border-yellow-400 dark:border-yellow-600 rounded-xl">
+              <p className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                💰 It's free, but if you find this useful, pay $5
+              </p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                Click the yellow <span className="font-bold">"Pay $5"</span> button in the top right →
+              </p>
+            </div>
+
             <p className="text-base text-gray-600 dark:text-gray-400 mb-6">
               Files stay local in your browser. Nothing gets uploaded. Progress saves automatically.
             </p>

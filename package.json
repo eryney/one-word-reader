@@ -1,0 +1,26 @@
+{
+  "name": "one-word-reader",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "postinstall": "cp node_modules/pdfjs-dist/build/pdf.worker.min.mjs public/"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
+    "epubjs": "^0.3.93",
+    "pdfjs-dist": "^5.4.530",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "vite": "^7.3.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "canvas": "^3.2.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17"
+  }
+}

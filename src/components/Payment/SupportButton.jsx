@@ -1,5 +1,5 @@
 export default function SupportButton() {
-  const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/test_dRm6oH1Pk0Cb1oc6glbQY00';
+  const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/dRm6oH1Pk0Cb1oc6glbQY00';
 
   return (
     <a

@@ -135,6 +135,22 @@ export default function LibraryView({ onBookSelect }) {
           </div>
         )}
       </main>
+
+      {/* Footer */}
+      <footer className="py-8 text-center border-t border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-900/50">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Made by{' '}
+          <a
+            href="https://x.com/eryney_ok"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-red-600 dark:text-red-400 hover:underline"
+          >
+            Eryney Marrogi
+          </a>{' '}
+          and Claude
+        </p>
+      </footer>
     </div>
   );
 }

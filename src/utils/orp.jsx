@@ -8,7 +8,7 @@ export function calculateORP(word) {
 }
 
 // Highlight ORP character with FIXED CENTER ALIGNMENT
-// The red letter stays at the exact same position on screen
+// The red letter is ALWAYS at the exact center of the screen
 export function highlightORP(word) {
   if (!word) return null;
 
@@ -20,17 +20,41 @@ export function highlightORP(word) {
   const after = word.slice(orpIndex + 1);
 
   return (
-    <span className="inline-block relative">
-      <span className="inline-flex items-baseline justify-center">
-        <span className="inline-block text-right" style={{ minWidth: '0', marginRight: '0.3em' }}>
-          {before}
-        </span>
-        <span className="text-red-500 font-bold inline-block" style={{ minWidth: '1ch' }}>
-          {orp}
-        </span>
-        <span className="inline-block text-left" style={{ minWidth: '0', marginLeft: '0.3em' }}>
-          {after}
-        </span>
+    <span className="relative inline-block w-full h-full">
+      {/* Text before ORP - ends just before center */}
+      <span
+        className="absolute whitespace-nowrap text-right"
+        style={{
+          top: 0,
+          right: '50%',
+          paddingRight: '0.3em'
+        }}
+      >
+        {before}
+      </span>
+
+      {/* ORP at dead center - NEVER moves */}
+      <span
+        className="absolute text-red-500 font-bold whitespace-nowrap"
+        style={{
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)'
+        }}
+      >
+        {orp}
+      </span>
+
+      {/* Text after ORP - starts just after center */}
+      <span
+        className="absolute whitespace-nowrap text-left"
+        style={{
+          top: 0,
+          left: '50%',
+          paddingLeft: '0.3em'
+        }}
+      >
+        {after}
       </span>
     </span>
   );

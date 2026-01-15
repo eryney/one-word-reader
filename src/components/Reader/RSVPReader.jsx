@@ -107,13 +107,13 @@ export default function RSVPReader({ words, initialIndex = 0, initialWPM, onProg
 
   return (
     <div className="h-screen bg-black flex flex-col">
-      {/* Fullscreen mode - only show word with ORP fixed */}
+      {/* Fullscreen mode - ORP FIXED AT DEAD CENTER */}
       {isFullscreen ? (
         <div className="h-screen bg-black flex items-center justify-center">
-          <div className="relative w-full max-w-6xl px-8">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-['PT_Serif'] font-medium text-white tracking-wide text-center whitespace-nowrap">
+          <div className="relative w-full px-8" style={{ height: '1.2em' }}>
+            <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-['PT_Serif'] font-medium text-white tracking-wide">
               {highlightORP(currentWord)}
-            </h1>
+            </div>
           </div>
         </div>
       ) : (
@@ -145,12 +145,12 @@ export default function RSVPReader({ words, initialIndex = 0, initialWPM, onProg
             </button>
           </div>
 
-          {/* Main word display - ORP fixed in center */}
+          {/* Main word display - ORP FIXED AT DEAD CENTER */}
           <div className="flex-1 flex items-center justify-center px-8">
-            <div className="relative w-full max-w-4xl">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-['PT_Serif'] font-medium text-white tracking-wide text-center whitespace-nowrap">
+            <div className="relative w-full" style={{ height: '1.2em' }}>
+              <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-['PT_Serif'] font-medium text-white tracking-wide">
                 {highlightORP(currentWord)}
-              </h1>
+              </div>
             </div>
           </div>
 

@@ -27,7 +27,7 @@ export function highlightORP(word) {
         style={{
           top: 0,
           right: '50%',
-          paddingRight: '0.4em'
+          paddingRight: '0.35em'
         }}
       >
         {before}
@@ -51,7 +51,7 @@ export function highlightORP(word) {
         style={{
           top: 0,
           left: '50%',
-          paddingLeft: '0.4em'
+          paddingLeft: '0.35em'
         }}
       >
         {after}

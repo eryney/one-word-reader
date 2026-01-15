@@ -107,12 +107,14 @@ export default function RSVPReader({ words, initialIndex = 0, initialWPM, onProg
 
   return (
     <div className="h-screen bg-black flex flex-col">
-      {/* Fullscreen mode - only show word */}
+      {/* Fullscreen mode - only show word with ORP fixed */}
       {isFullscreen ? (
         <div className="h-screen bg-black flex items-center justify-center">
-          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-medium text-white tracking-wide text-center px-8">
-            {highlightORP(currentWord)}
-          </h1>
+          <div className="relative w-full max-w-6xl px-8">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-['PT_Serif'] font-medium text-white tracking-wide text-center whitespace-nowrap">
+              {highlightORP(currentWord)}
+            </h1>
+          </div>
         </div>
       ) : (
         <>
@@ -143,11 +145,13 @@ export default function RSVPReader({ words, initialIndex = 0, initialWPM, onProg
             </button>
           </div>
 
-          {/* Main word display */}
+          {/* Main word display - ORP fixed in center */}
           <div className="flex-1 flex items-center justify-center px-8">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium text-white tracking-wide text-center">
-              {highlightORP(currentWord)}
-            </h1>
+            <div className="relative w-full max-w-4xl">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-['PT_Serif'] font-medium text-white tracking-wide text-center whitespace-nowrap">
+                {highlightORP(currentWord)}
+              </h1>
+            </div>
           </div>
 
           {/* Progress bar */}

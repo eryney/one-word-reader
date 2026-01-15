@@ -14,7 +14,7 @@ export default function SectionPanel({ sections, onJumpTo, currentIndex }) {
   );
 
   return (
-    <div className="fixed top-4 right-20 z-40">
+    <div className="fixed top-20 right-4 z-40">
       {/* Toggle button */}
       <button
         onClick={() => setIsOpen(!isOpen)}

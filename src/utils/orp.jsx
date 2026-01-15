@@ -23,11 +23,12 @@ export function highlightORP(word) {
     <span className="relative inline-block w-full h-full">
       {/* Text before ORP - ends just before center */}
       <span
-        className="absolute whitespace-nowrap text-right text-white"
+        className="absolute whitespace-nowrap text-right"
         style={{
           top: 0,
           right: '50%',
-          paddingRight: '0.35em'
+          paddingRight: '0.35em',
+          color: '#ffffff'
         }}
       >
         {before}
@@ -35,11 +36,12 @@ export function highlightORP(word) {
 
       {/* ORP at dead center - NEVER moves */}
       <span
-        className="absolute text-red-500 font-bold whitespace-nowrap"
+        className="absolute font-bold whitespace-nowrap"
         style={{
           top: 0,
           left: '50%',
-          transform: 'translateX(-50%)'
+          transform: 'translateX(-50%)',
+          color: '#ef4444'
         }}
       >
         {orp}
@@ -47,11 +49,12 @@ export function highlightORP(word) {
 
       {/* Text after ORP - starts just after center */}
       <span
-        className="absolute whitespace-nowrap text-left text-white"
+        className="absolute whitespace-nowrap text-left"
         style={{
           top: 0,
           left: '50%',
-          paddingLeft: '0.35em'
+          paddingLeft: '0.35em',
+          color: '#ffffff'
         }}
       >
         {after}

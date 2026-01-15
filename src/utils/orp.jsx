@@ -1,4 +1,5 @@
 // Calculate Optimal Recognition Point (ORP) for a word
+// v2
 export function calculateORP(word) {
   const length = word.length;
   if (length <= 1) return 0;

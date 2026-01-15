@@ -3,7 +3,7 @@ import { getBooks, saveBook, deleteBook as removeBook, saveBookText } from '../s
 import { deleteProgress } from '../services/storage/progressStorage';
 import { parseEPUB } from '../services/parsers/epubParser';
 import { parsePDF } from '../services/parsers/pdfParser';
-import { segmentIntoWords } from '../services/textProcessor';
+import { segmentIntoWords, mapSectionsToWordIndices } from '../services/textProcessor';
 
 export function useBooks() {
   const [books, setBooks] = useState([]);
@@ -32,6 +32,14 @@ export function useBooks() {
         throw new Error('Unsupported file format. Please upload .epub or .pdf files.');
       }
 
+      // NEW: Map section markers to word indices
+      const sections = mapSectionsToWordIndices(
+        parsedData.text,
+        parsedData.sectionMarkers
+      );
+
+      console.log(`Mapped ${sections.length} sections to word indices`);
+
       // Create book object
       const book = {
         id: crypto.randomUUID(),
@@ -39,7 +47,8 @@ export function useBooks() {
         author: parsedData.author,
         format: parsedData.format,
         wordCount: parsedData.wordCount,
-        dateAdded: new Date().toISOString()
+        dateAdded: new Date().toISOString(),
+        sections: sections // NEW: Include sections
       };
 
       // Save book metadata

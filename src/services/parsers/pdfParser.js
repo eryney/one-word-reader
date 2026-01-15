@@ -94,6 +94,37 @@ function classifyTextItem(item, docStructure) {
   return 'UNKNOWN';
 }
 
+// Check if a title is likely to be a section heading
+function isLikelySection(title) {
+  if (!title || title.length < 2) return false;
+
+  const patterns = [
+    /^abstract$/i,
+    /^introduction$/i,
+    /^methods?$/i,
+    /^methodology$/i,
+    /^results?$/i,
+    /^discussion$/i,
+    /^conclusion$/i,
+    /^conclusions$/i,
+    /^references$/i,
+    /^bibliography$/i,
+    /^acknowledgements?$/i,
+    /^appendix/i,
+    /^background$/i,
+    /^related\s+work$/i,
+    /^literature\s+review$/i,
+    /^experimental\s+setup$/i,
+    /^evaluation$/i,
+    /^future\s+work$/i,
+    /^\d+\.?\s+[A-Z]/,  // "1. Introduction" or "1 Introduction"
+    /^chapter\s+\d+/i,
+    /^section\s+\d+/i
+  ];
+
+  return patterns.some(p => p.test(title.trim()));
+}
+
 export async function parsePDF(file) {
   try {
     console.log('Starting PDF parse for:', file.name);
@@ -108,6 +139,8 @@ export async function parsePDF(file) {
     console.log('Body font height:', docStructure.bodyFontHeight);
 
     let fullText = '';
+    let sectionMarkers = []; // NEW: Track section markers
+    let currentCharPosition = 0; // NEW: Track character position
     let stats = {
       total: 0,
       body: 0,
@@ -132,14 +165,26 @@ export async function parsePDF(file) {
         // Classify this text item
         const classification = classifyTextItem(item, docStructure);
 
+        // Check if this is a section title
+        if (classification === 'TITLE' && isLikelySection(item.str)) {
+          sectionMarkers.push({
+            title: item.str.trim(),
+            charPosition: currentCharPosition,
+            pageNum: i,
+            level: 1 // Default level for now
+          });
+        }
+
         // Only include BODY, TITLE, and UNKNOWN text
         if (classification === 'BODY' || classification === 'TITLE' || classification === 'UNKNOWN') {
           // Add line break if on new line
           if (lastY !== null && Math.abs(item.transform[5] - lastY) > 5) {
             pageText += '\n';
+            currentCharPosition += 1;
           }
 
           pageText += item.str + ' ';
+          currentCharPosition += item.str.length + 1;
           lastY = item.transform[5];
           stats.body++;
         } else {
@@ -150,12 +195,15 @@ export async function parsePDF(file) {
       }
 
       fullText += pageText + '\n\n';
+      currentCharPosition += 2; // Account for double newline
 
       if (i <= 3) {
         console.log(`Page ${i} extracted, length:`, pageText.length);
         console.log(`Page ${i} first 200 chars:`, pageText.substring(0, 200));
       }
     }
+
+    console.log(`Found ${sectionMarkers.length} section markers:`, sectionMarkers.map(s => s.title));
 
     console.log('Extraction stats:', stats);
     console.log(`Filtered out: ${stats.filtered} items (${stats.captions} captions, ${stats.headers} headers/footers)`);
@@ -188,7 +236,8 @@ export async function parsePDF(file) {
       author: author,
       text: cleanedText,
       wordCount: wordCount,
-      format: 'pdf'
+      format: 'pdf',
+      sectionMarkers: sectionMarkers // NEW: Include section markers
     };
 
     console.log('PDF parse complete:', result);

@@ -5,11 +5,12 @@ import ReaderControls from './ReaderControls';
 import SpeedSlider from './SpeedSlider';
 import ProgressBar from '../Shared/ProgressBar';
 import BookmarkPanel from './BookmarkPanel';
+import SectionPanel from './SectionPanel';
 import { SKIP_COUNT, PROGRESS_SAVE_INTERVAL } from '../../utils/constants';
 import { getBookmarks, addBookmark, deleteBookmark } from '../../services/storage/bookmarkStorage';
 import { startSession, endSession } from '../../services/storage/statsStorage';
 
-export default function RSVPReader({ words, initialIndex = 0, initialWPM, onProgress, onExit, bookId }) {
+export default function RSVPReader({ words, initialIndex = 0, initialWPM, onProgress, onExit, bookId, sections }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [bookmarks, setBookmarks] = useState(() => getBookmarks(bookId));
   const sessionRef = useRef(startSession(bookId));
@@ -99,6 +100,13 @@ export default function RSVPReader({ words, initialIndex = 0, initialWPM, onProg
     window.dispatchEvent(event);
   };
 
+  const handleJumpToSection = (wordIndex) => {
+    pause();
+    // Use the jumpTo function from useRSVP
+    const event = new CustomEvent('jumpToPosition', { detail: wordIndex });
+    window.dispatchEvent(event);
+  };
+
   const handleExit = () => {
     // Save stats before exiting
     endSession(sessionRef.current, currentIndex);
@@ -177,6 +185,13 @@ export default function RSVPReader({ words, initialIndex = 0, initialWPM, onProg
           <div className="text-center pb-4 text-gray-500 text-sm">
             {currentIndex + 1} / {words.length}
           </div>
+
+          {/* Section panel */}
+          <SectionPanel
+            sections={sections}
+            onJumpTo={handleJumpToSection}
+            currentIndex={currentIndex}
+          />
 
           {/* Bookmark panel */}
           <BookmarkPanel

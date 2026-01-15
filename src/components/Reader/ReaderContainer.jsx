@@ -10,6 +10,7 @@ export default function ReaderContainer({ book, onExit }) {
   const [mode, setMode] = useState('rsvp'); // 'rsvp' or 'traditional'
   const [text, setText] = useState('');
   const [words, setWords] = useState([]);
+  const [sections, setSections] = useState([]); // NEW: Track sections
   const [loading, setLoading] = useState(true);
   const { progress, updateProgress } = useProgress(book.id);
 
@@ -26,6 +27,12 @@ export default function ReaderContainer({ book, onExit }) {
         console.log('First 10 words:', bookWords.slice(0, 10));
         setWords(bookWords);
 
+        // NEW: Load sections from book metadata
+        if (book.sections && book.sections.length > 0) {
+          setSections(book.sections);
+          console.log('Loaded sections:', book.sections.length);
+        }
+
         // Set initial mode from progress if available
         if (progress?.mode) {
           setMode(progress.mode);
@@ -39,7 +46,7 @@ export default function ReaderContainer({ book, onExit }) {
     };
 
     loadText();
-  }, [book.id, progress]);
+  }, [book.id, book.sections, progress]);
 
   const handleRSVPProgress = (currentIndex) => {
     updateProgress({
@@ -93,6 +100,7 @@ export default function ReaderContainer({ book, onExit }) {
           onProgress={handleRSVPProgress}
           onExit={onExit}
           bookId={book.id}
+          sections={sections}
         />
       ) : (
         <TraditionalReader

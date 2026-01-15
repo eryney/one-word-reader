@@ -10,6 +10,7 @@
     "postinstall": "cp node_modules/pdfjs-dist/build/pdf.worker.min.mjs public/"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "@vitejs/plugin-react": "^5.1.2",
     "epubjs": "^0.3.93",
     "pdfjs-dist": "^5.4.530",
